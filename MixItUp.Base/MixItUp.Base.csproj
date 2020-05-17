@@ -10,9 +10,11 @@
     <None Remove="XSplit\Mix It Up.html" />
   </ItemGroup>
 
+<!--
   <ItemGroup>
     <Compile Include="..\..\Mix It Up Web\MixItUpSecrets.cs" Link="MixItUpSecrets.cs" />
   </ItemGroup>
+-->
 
   <ItemGroup>
     <Content Include="Overlay\OverlayPage.html">
@@ -38,7 +40,7 @@
 
   <ItemGroup>
     <Reference Include="System.ComponentModel.DataAnnotations">
-      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.6.1\System.ComponentModel.DataAnnotations.dll</HintPath>
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.ComponentModel.DataAnnotations.dll</HintPath>
     </Reference>
   </ItemGroup>
 
