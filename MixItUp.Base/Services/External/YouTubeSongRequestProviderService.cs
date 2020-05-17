@@ -16,7 +16,7 @@ using System.Web;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
-namespace MixItUp.Desktop.Services
+namespace MixItUp.Base.Services.External
 {
     [ComVisible(true)]
     public class YouTubeSongRequestProviderService : ISongRequestProviderService
@@ -75,12 +75,12 @@ namespace MixItUp.Desktop.Services
 
         public void SongRequestComplete(string result)
         {
-            this.status = SerializerHelper.DeserializeFromString<SongRequestCurrentlyPlayingModel>(result);
+            this.status = JSONSerializerHelper.DeserializeFromString<SongRequestCurrentlyPlayingModel>(result);
         }
 
         public void SetStatus(string result)
         {
-            this.status = SerializerHelper.DeserializeFromString<SongRequestCurrentlyPlayingModel>(result);
+            this.status = JSONSerializerHelper.DeserializeFromString<SongRequestCurrentlyPlayingModel>(result);
         }
 
         public void Error(string error)
@@ -104,7 +104,7 @@ namespace MixItUp.Desktop.Services
                             string pageToken = null;
                             do
                             {
-                                string restURL = string.Format("youtube/v3/playlistItems?playlistId={0}&maxResults=50&part=snippet,contentDetails&key={1}", HttpUtility.UrlEncode(queryParameteters["list"]), ChannelSession.SecretManager.GetSecret("YouTubeKey"));
+                                string restURL = string.Format("youtube/v3/playlistItems?playlistId={0}&maxResults=50&part=snippet,contentDetails&key={1}", HttpUtility.UrlEncode(queryParameteters["list"]), ChannelSession.Services.Secrets.GetSecret("YouTubeKey"));
                                 if (!string.IsNullOrEmpty(pageToken))
                                 {
                                     restURL += "&pageToken=" + pageToken;
@@ -172,7 +172,7 @@ namespace MixItUp.Desktop.Services
 
                     using (AdvancedHttpClient client = new AdvancedHttpClient("https://www.googleapis.com/"))
                     {
-                        HttpResponseMessage response = await client.GetAsync(string.Format("youtube/v3/videos?id={0}&part=snippet,contentDetails&key={1}", HttpUtility.UrlEncode(identifier), ChannelSession.SecretManager.GetSecret("YouTubeKey")));
+                        HttpResponseMessage response = await client.GetAsync(string.Format("youtube/v3/videos?id={0}&part=snippet,contentDetails&key={1}", HttpUtility.UrlEncode(identifier), ChannelSession.Services.Secrets.GetSecret("YouTubeKey")));
                         if (response.StatusCode == HttpStatusCode.OK)
                         {
                             string content = await response.Content.ReadAsStringAsync();
@@ -204,7 +204,7 @@ namespace MixItUp.Desktop.Services
                 {
                     using (AdvancedHttpClient client = new AdvancedHttpClient("https://www.googleapis.com/"))
                     {
-                        HttpResponseMessage response = await client.GetAsync(string.Format("youtube/v3/search?q={0}&maxResults=5&type=video&part=snippet&key={1}", HttpUtility.UrlEncode(identifier), ChannelSession.SecretManager.GetSecret("YouTubeKey")));
+                        HttpResponseMessage response = await client.GetAsync(string.Format("youtube/v3/search?q={0}&maxResults=5&type=video&part=snippet&key={1}", HttpUtility.UrlEncode(identifier), ChannelSession.Services.Secrets.GetSecret("YouTubeKey")));
                         if (response.StatusCode == HttpStatusCode.OK)
                         {
                             string content = await response.Content.ReadAsStringAsync();

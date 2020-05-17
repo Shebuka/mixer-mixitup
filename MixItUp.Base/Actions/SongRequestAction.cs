@@ -80,7 +80,7 @@ namespace MixItUp.Base.Actions
                         if (!await ChannelSession.Services.SongRequestService.Enable())
                         {
                             await ChannelSession.Services.SongRequestService.Disable();
-                            await ChannelSession.Services.Chat.Whisper(user.UserName, "Song Requests were not able to enabled, please try manually enabling it.");
+                            await ChannelSession.Services.Chat.Whisper(user, "Song Requests were not able to enabled, please try manually enabling it.");
                             return;
                         }
                     }
@@ -93,7 +93,7 @@ namespace MixItUp.Base.Actions
                 {
                     if (ChannelSession.Services.SongRequestService == null || !ChannelSession.Services.SongRequestService.IsEnabled)
                     {
-                        await ChannelSession.Services.Chat.Whisper(user.UserName, "Song Requests are not currently enabled");
+                        await ChannelSession.Services.Chat.Whisper(user, "Song Requests are not currently enabled");
                         return;
                     }
 
@@ -105,7 +105,7 @@ namespace MixItUp.Base.Actions
                             IEnumerable<SongRequestModel> requestedSongs = ChannelSession.Services.SongRequestService.RequestSongs.ToList().Where(s => s.User.Equals(user));
                             if (requestedSongs.Count() >= ChannelSession.Settings.SongRequestsMaxRequests)
                             {
-                                await ChannelSession.Services.Chat.Whisper(user.UserName, string.Format("You already have {0} song requests active, which is the max amount allowed", ChannelSession.Settings.SongRequestsMaxRequests));
+                                await ChannelSession.Services.Chat.Whisper(user, string.Format("You already have {0} song requests active, which is the max amount allowed", ChannelSession.Settings.SongRequestsMaxRequests));
                                 return;
                             }
                         }
@@ -140,7 +140,7 @@ namespace MixItUp.Base.Actions
                                 return;
                             }
                         }
-                        await ChannelSession.Services.Chat.Whisper(user.UserName, "Please specify a volume level [0-100].");
+                        await ChannelSession.Services.Chat.Whisper(user, "Please specify a volume level [0-100].");
                         return;
                     }
 #pragma warning disable CS0612 // Type or member is obsolete

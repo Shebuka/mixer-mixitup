@@ -11,13 +11,13 @@ using System.Net.Http;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace MixItUp.Base.Services
+namespace MixItUp.Base.Services.External
 {
     public interface ISpotifyService
     {
         SpotifyUserProfileModel Profile { get; }
 
-        Task<bool> Connect();
+        Task<Result> Connect();
 
         Task Disconnect();
 
@@ -50,7 +50,7 @@ namespace MixItUp.Base.Services
         OAuthTokenModel GetOAuthTokenCopy();
     }
 
-    public class SpotifyService : OAuthServiceBase, ISpotifyService, IDisposable
+    public class SpotifyService : OAuthExternalServiceBase, ISpotifyService, IDisposable
     {
         private const string BaseAddress = "https://api.spotify.com/v1/";
 
@@ -64,9 +64,10 @@ namespace MixItUp.Base.Services
 
         public SpotifyService() : base(SpotifyService.BaseAddress) { }
 
-        public SpotifyService(OAuthTokenModel token) : base(SpotifyService.BaseAddress, token) { }
+        public SpotifyService(OAuthTokenModel token) : base(SpotifyService.BaseAddress) { }
+        public override string Name { get { return "Spotify"; } }
 
-        public async Task<bool> Connect()
+        public override async Task<Result> Connect()
         {
             if (this.token != null)
             {
@@ -74,10 +75,7 @@ namespace MixItUp.Base.Services
                 {
                     await this.RefreshOAuthToken();
 
-                    if (await this.InitializeInternal())
-                    {
-                        return true;
-                    }
+                    return await this.InitializeInternal();
                 }
                 catch (Exception ex) { Logger.Log(ex); }
             }
@@ -91,7 +89,7 @@ namespace MixItUp.Base.Services
                     new KeyValuePair<string, string>("redirect_uri", MixerConnection.DEFAULT_OAUTH_LOCALHOST_URL),
                     new KeyValuePair<string, string>("code", authorizationCode),
                 };
-                this.token = await this.GetWWWFormUrlEncodedOAuthToken("https://accounts.spotify.com/api/token", SpotifyService.ClientID, ChannelSession.SecretManager.GetSecret("SpotifySecret"), body);
+                this.token = await this.GetWWWFormUrlEncodedOAuthToken("https://accounts.spotify.com/api/token", SpotifyService.ClientID, ChannelSession.Services.Secrets.GetSecret("SpotifySecret"), body);
 
                 if (this.token != null)
                 {
@@ -101,10 +99,10 @@ namespace MixItUp.Base.Services
                 }
             }
 
-            return false;
+            return new Result(false);
         }
 
-        public Task Disconnect()
+        public override Task Disconnect()
         {
             this.token = null;
             this.cancellationTokenSource.Cancel();
@@ -236,21 +234,25 @@ namespace MixItUp.Base.Services
                     new KeyValuePair<string, string>("grant_type", "refresh_token"),
                     new KeyValuePair<string, string>("refresh_token", this.token.refreshToken),
                 };
-                OAuthTokenModel token = await this.GetWWWFormUrlEncodedOAuthToken("https://accounts.spotify.com/api/token", SpotifyService.ClientID, ChannelSession.SecretManager.GetSecret("SpotifySecret"), body);
+                OAuthTokenModel token = await this.GetWWWFormUrlEncodedOAuthToken("https://accounts.spotify.com/api/token", SpotifyService.ClientID, ChannelSession.Services.Secrets.GetSecret("SpotifySecret"), body);
                 token.refreshToken = this.token.refreshToken;
                 this.token = token;
             }
         }
 
-        private async Task<bool> InitializeInternal()
+        protected override async Task<Result> InitializeInternal()
         {
             this.Profile = await this.GetCurrentProfile();
             if (this.Profile != null)
             {
                 await this.DisableRepeat();
-                return true;
+                return new Result(true);
             }
-            return false;
+            return new Result(false);
+        }
+        protected override void DisposeInternal()
+        {
+            this.cancellationTokenSource.Dispose();
         }
 
         private async Task<IEnumerable<JObject>> GetPagedResult(string endpointURL)
@@ -328,33 +330,5 @@ namespace MixItUp.Base.Services
         {
             Logger.Log(LogLevel.Debug, string.Format("Spotify Log: {0} - {1} - {2}", response.RequestMessage.ToString(), response.StatusCode, await response.Content.ReadAsStringAsync()));
         }
-
-        #region IDisposable Support
-        private bool disposedValue = false; // To detect redundant calls
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (!disposedValue)
-            {
-                if (disposing)
-                {
-                    // Dispose managed state (managed objects).
-                    this.cancellationTokenSource.Dispose();
-                }
-
-                // Free unmanaged resources (unmanaged objects) and override a finalizer below.
-                // Set large fields to null.
-
-                disposedValue = true;
-            }
-        }
-
-        // This code added to correctly implement the disposable pattern.
-        public void Dispose()
-        {
-            // Do not change this code. Put cleanup code in Dispose(bool disposing) above.
-            Dispose(true);
-        }
-        #endregion
     }
 }

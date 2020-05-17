@@ -17,6 +17,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Web;
+using MixItUp.Base.Services;
 
 namespace MixItUp.Base.Util
 {
@@ -994,7 +995,7 @@ namespace MixItUp.Base.Util
             {
                 this.ReplaceSpecialIdentifier(header + "title", song.Name);
                 this.ReplaceSpecialIdentifier(header + "albumimage", (song.AlbumImage != null) ? song.AlbumImage : string.Empty);
-                await this.HandleUserSpecialIdentifiers((song.User != null) ? song.User : new UserViewModel(0, "Backup"), header);
+                await this.HandleUserSpecialIdentifiers((song.User != null) ? song.User : new UserViewModel("Backup"), header);
             }
             else
             {
