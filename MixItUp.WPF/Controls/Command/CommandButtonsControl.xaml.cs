@@ -297,6 +297,11 @@ namespace MixItUp.WPF.Controls.Command
                     }
                     else
                     {
+                        extraSpecialIdentifiers["songtitle"] = "Test Song";
+                        extraSpecialIdentifiers["songalbumart"] = SpotifySongRequestProviderService.SpotifyDefaultAlbumArt;
+                        extraSpecialIdentifiers["songusername"] = currentUser.UserName;
+                        extraSpecialIdentifiers["spotifysongtitle"] = "Test Song";
+                        extraSpecialIdentifiers["spotifysongalbumart"] = SpotifySongRequestProviderService.SpotifyDefaultAlbumArt;
                         extraSpecialIdentifiers["queueposition"] = "1";
                     }
                 }

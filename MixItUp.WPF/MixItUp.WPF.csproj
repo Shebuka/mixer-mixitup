@@ -526,6 +526,9 @@
     <Compile Include="Controls\Dashboard\QuickCommandsDashboardControl.xaml.cs">
       <DependentUpon>QuickCommandsDashboardControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Dashboard\SongRequestsDashboardControl.xaml.cs">
+      <DependentUpon>SongRequestsDashboardControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Dashboard\StatisticsDashboardControl.xaml.cs">
       <DependentUpon>StatisticsDashboardControl.xaml</DependentUpon>
     </Compile>
@@ -881,6 +884,9 @@
     <Compile Include="Controls\Services\StreamElementsServiceControl.xaml.cs">
       <DependentUpon>StreamElementsServiceControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Controls\Services\SpotifyServiceControl.xaml.cs">
+      <DependentUpon>SpotifyServiceControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Services\StreamJarServiceControl.xaml.cs">
       <DependentUpon>StreamJarServiceControl.xaml</DependentUpon>
     </Compile>
@@ -942,6 +948,9 @@
       <DependentUpon>SerialDevicesSettingsControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Settings\SettingsControlBase.cs" />
+    <Compile Include="Controls\Settings\SongRequestsSettingsControl.xaml.cs">
+      <DependentUpon>SongRequestsSettingsControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Controls\Settings\ThemeSettingsControl.xaml.cs">
       <DependentUpon>ThemeSettingsControl.xaml</DependentUpon>
     </Compile>
@@ -1291,6 +1300,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Dashboard\QuickCommandsDashboardControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Dashboard\SongRequestsDashboardControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -1762,6 +1775,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Controls\Services\SpotifyServiceControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Controls\Services\StreamJarServiceControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -1839,6 +1856,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Controls\Settings\SerialDevicesSettingsControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Settings\SongRequestsSettingsControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

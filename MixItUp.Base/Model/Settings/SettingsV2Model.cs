@@ -359,6 +359,35 @@ namespace MixItUp.Base.Model.Settings
         public Dictionary<Guid, RemoteProfileBoardsModel> RemoteProfileBoards { get; set; } = new Dictionary<Guid, RemoteProfileBoardsModel>();
 
         #endregion Remote
+		
+        #region SongRequest
+
+        [DataMember]
+        public HashSet<SongRequestServiceTypeEnum> SongRequestServiceTypes { get; set; }
+        [DataMember]
+        public bool SpotifyAllowExplicit { get; set; }
+        [DataMember]
+        public string DefaultPlaylist { get; set; }
+        [DataMember]
+        public bool SongRequestSubPriority { get; set; }
+        [DataMember]
+        public int SongRequestsMaxRequests { get; set; }
+        [DataMember]
+        public bool SongRequestsSaveRequestQueue { get; set; }
+        [DataMember]
+        public List<SongRequestModel> SongRequestsSavedRequestQueue { get; set; } = new List<SongRequestModel>();
+        [DataMember]
+        public int SongRequestVolume { get; set; } = 100;
+        [DataMember]
+        public List<SongRequestModel> SongRequestsBannedSongs { get; set; } = new List<SongRequestModel>();
+        [DataMember]
+        public CustomCommand SongAddedCommand { get; set; }
+        [DataMember]
+        public CustomCommand SongRemovedCommand { get; set; }
+        [DataMember]
+        public CustomCommand SongPlayedCommand { get; set; }
+		
+        #endregion SongRequest
 
         #region Services
 

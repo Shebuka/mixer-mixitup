@@ -729,6 +729,9 @@ namespace MixItUp.Base.Services
             commands.Add(settings.ModerationStrike1Command);
             commands.Add(settings.ModerationStrike2Command);
             commands.Add(settings.ModerationStrike3Command);
+            commands.Add(settings.SongAddedCommand);
+            commands.Add(settings.SongRemovedCommand);
+            commands.Add(settings.SongPlayedCommand);
 
             return commands.Where(c => c != null);
         }

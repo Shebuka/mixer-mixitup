@@ -28,6 +28,7 @@ namespace MixItUp.Base.Services
         public IGameQueueService GameQueueService { get; protected set; }
         public IImageService Image { get; protected set; }
         public ITranslationService TranslationService { get; protected set; }
+        public ISongRequestService SongRequestService { get; protected set; }
         public IGiveawayService GiveawayService { get; protected set; }
         public ISerialService SerialService { get; protected set; }
         public LocalRemoteServiceBase RemoteService { get; protected set; }
@@ -40,6 +41,7 @@ namespace MixItUp.Base.Services
         public IStreamlabsService Streamlabs { get; protected set; }
         public IStreamElementsService StreamElements { get; protected set; }
         public ITwitterService Twitter { get; protected set; }
+        public SpotifyService Spotify { get; protected set; }
         public IDiscordService Discord { get; protected set; }
         public ITiltifyService Tiltify { get; protected set; }
         public IExtraLifeService ExtraLife { get; protected set; }

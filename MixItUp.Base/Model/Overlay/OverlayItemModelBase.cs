@@ -28,7 +28,7 @@ namespace MixItUp.Base.Model.Overlay
         Timer,
         TimerTrain,
         StreamBoss,
-        [Obsolete]
+        [Name("Song Requests")]
         SongRequests,
         TickerTape,
         SparkCrystal,

@@ -44,14 +44,14 @@ namespace MixItUp.Base.Actions
         SpecialIdentifier,
         [Name("FileReadAndWrite")]
         File,
-        [Obsolete]
+        [Name("Song Request")]
         SongRequest,
-        [Obsolete]
         Spotify,
         Discord,
         Translation,
         Twitter,
         Conditional,
+        [Name("Streamlabs OBS")]
         [Obsolete]
         StreamlabsOBS,
         StreamingSoftware,
@@ -128,41 +128,3 @@ namespace MixItUp.Base.Actions
         protected abstract SemaphoreSlim AsyncSemaphore { get; }
     }
 }
-
-#region Legacy Actions
-
-namespace MixItUp.Base.Actions
-{
-    public class SongRequestAction : ActionBase
-    {
-        private static SemaphoreSlim asyncSemaphore = new SemaphoreSlim(1);
-
-        protected override SemaphoreSlim AsyncSemaphore { get { return SongRequestAction.asyncSemaphore; } }
-
-        public SongRequestAction() { }
-
-        protected override Task PerformInternal(UserViewModel user, IEnumerable<string> arguments)
-        {
-            return Task.FromResult(0);
-        }
-    }
-
-    [DataContract]
-    public class SpotifyAction : ActionBase
-    {
-        private static SemaphoreSlim asyncSemaphore = new SemaphoreSlim(1);
-
-        protected override SemaphoreSlim AsyncSemaphore { get { return SpotifyAction.asyncSemaphore; } }
-
-#pragma warning disable CS0612 // Type or member is obsolete
-        public SpotifyAction() : base(ActionTypeEnum.Spotify) { }
-#pragma warning restore CS0612 // Type or member is obsolete
-
-        protected override Task PerformInternal(UserViewModel user, IEnumerable<string> arguments)
-        {
-            return Task.FromResult(0);
-        }
-    }
-}
-
-#endregion
