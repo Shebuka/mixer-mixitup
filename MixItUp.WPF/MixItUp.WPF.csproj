@@ -10,7 +10,7 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MixItUp.WPF</RootNamespace>
     <AssemblyName>MixItUp</AssemblyName>
-    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -226,7 +226,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Globalization, Version=4.0.11.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="System.IO.Compression">
-      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.8\System.IO.Compression.dll</HintPath>
+      <HintPath>..\packages\System.IO.Compression.ZipFile.4.3.0\lib\net46\System.IO.Compression.dll</HintPath>
     </Reference>
     <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.IO.Compression.ZipFile, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
@@ -396,6 +396,9 @@
     </Compile>
     <Compile Include="Controls\Actions\SerialActionControl.xaml.cs">
       <DependentUpon>SerialActionControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Actions\SongRequestActionControl.xaml.cs">
+      <DependentUpon>SongRequestActionControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Actions\StreamingPlatformActionControl.xaml.cs">
       <DependentUpon>StreamingPlatformActionControl.xaml</DependentUpon>
@@ -683,6 +686,9 @@
     </Compile>
     <Compile Include="Controls\Overlay\OverlayLeaderboardListItemControl.xaml.cs">
       <DependentUpon>OverlayLeaderboardListItemControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Overlay\OverlaySongRequestsListItemControl.xaml.cs">
+      <DependentUpon>OverlaySongRequestsListItemControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Controls\Overlay\OverlaySparkCrystalItemControl.xaml.cs">
       <DependentUpon>OverlaySparkCrystalItemControl.xaml</DependentUpon>
@@ -1023,6 +1029,7 @@
     <Compile Include="Services\WindowsTelemetryService.cs" />
     <Compile Include="Services\WindowsServicesManager.cs" />
     <Compile Include="Services\WindowsAudioService.cs" />
+    <Compile Include="Services\YouTubeSongRequestProviderService.cs" />
     <Compile Include="UpdateWindow.xaml.cs">
       <DependentUpon>UpdateWindow.xaml</DependentUpon>
     </Compile>
@@ -1134,6 +1141,10 @@
     <Page Include="Controls\Actions\SerialActionControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Actions\SongRequestActionControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\Actions\StreamingPlatformActionControl.xaml">
       <SubType>Designer</SubType>
@@ -1506,6 +1517,10 @@
     <Page Include="Controls\Overlay\OverlayLeaderboardListItemControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Overlay\OverlaySongRequestsListItemControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="Controls\Overlay\OverlaySparkCrystalItemControl.xaml">
       <SubType>Designer</SubType>

@@ -364,7 +364,7 @@ namespace MixItUp.Base.Model.Settings
         #region SongRequest
 
         [DataMember]
-        public HashSet<SongRequestServiceTypeEnum> SongRequestServiceTypes { get; set; }
+        public HashSet<SongRequestServiceTypeEnum> SongRequestServiceTypes { get; set; } = new HashSet<SongRequestServiceTypeEnum>();
         [DataMember]
         public bool SpotifyAllowExplicit { get; set; }
         [DataMember]

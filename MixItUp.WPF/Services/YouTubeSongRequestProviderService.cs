@@ -1,6 +1,7 @@
 ﻿using MixItUp.Base;
 using MixItUp.Base.Model.SongRequests;
 using MixItUp.Base.Services;
+using MixItUp.Base.Services.External;
 using MixItUp.Base.Util;
 using Newtonsoft.Json.Linq;
 using StreamingClient.Base.Util;
@@ -16,7 +17,7 @@ using System.Web;
 using System.Windows.Controls;
 using System.Windows.Threading;
 
-namespace MixItUp.Base.Services.External
+namespace MixItUp.WPF.Services
 {
     [ComVisible(true)]
     public class YouTubeSongRequestProviderService : ISongRequestProviderService

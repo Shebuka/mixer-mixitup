@@ -4,6 +4,7 @@ using MixItUp.Base.Model;
 using MixItUp.Base.Model.Chat;
 using MixItUp.Base.Model.User;
 using MixItUp.Base.Services;
+using MixItUp.Base.Services.External;
 using MixItUp.Base.Util;
 using MixItUp.Base.ViewModel.Controls.MainControls;
 using MixItUp.Base.ViewModel.MixPlay;
@@ -299,7 +300,7 @@ namespace MixItUp.WPF.Controls.Command
                     {
                         extraSpecialIdentifiers["songtitle"] = "Test Song";
                         extraSpecialIdentifiers["songalbumart"] = SpotifySongRequestProviderService.SpotifyDefaultAlbumArt;
-                        extraSpecialIdentifiers["songusername"] = currentUser.UserName;
+                        extraSpecialIdentifiers["songusername"] = currentUser.Username;
                         extraSpecialIdentifiers["spotifysongtitle"] = "Test Song";
                         extraSpecialIdentifiers["spotifysongalbumart"] = SpotifySongRequestProviderService.SpotifyDefaultAlbumArt;
                         extraSpecialIdentifiers["queueposition"] = "1";

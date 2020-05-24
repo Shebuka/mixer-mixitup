@@ -4,6 +4,7 @@ using MixItUp.Base.Services.External;
 using MixItUp.Base.Util;
 using MixItUp.Base.ViewModel.Window;
 using MixItUp.WPF.Controls.MainControls;
+using MixItUp.WPF.Services;
 using MixItUp.WPF.Windows;
 using StreamingClient.Base.Util;
 using System;

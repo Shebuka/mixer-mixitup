@@ -9,7 +9,7 @@ namespace MixItUp.WPF.Controls.Services
     /// <summary>
     /// Interaction logic for SpotifyServiceControl.xaml
     /// </summary>
-    public partial class SpotifyServiceControl : ServicesControlBase
+    public partial class SpotifyServiceControl : ServiceControlBase
     {
         public SpotifyServiceControl()
         {
@@ -18,70 +18,70 @@ namespace MixItUp.WPF.Controls.Services
 
         protected override Task OnLoaded()
         {
-            this.SetHeaderText("Spotify");
+            //this.SetHeaderText("Spotify");
 
-            if (ChannelSession.Settings.SpotifyOAuthToken != null)
-            {
-                this.ExistingAccountGrid.Visibility = Visibility.Visible;
+            //if (ChannelSession.Settings.SpotifyOAuthToken != null)
+            //{
+            //    this.ExistingAccountGrid.Visibility = Visibility.Visible;
 
-                this.SetCompletedIcon(visible: true);
-            }
-            else
-            {
-                this.NewLoginGrid.Visibility = Visibility.Visible;
-            }
+            //    this.SetCompletedIcon(visible: true);
+            //}
+            //else
+            //{
+            //    this.NewLoginGrid.Visibility = Visibility.Visible;
+            //}
 
             return base.OnLoaded();
         }
 
         private async void LogInButton_Click(object sender, RoutedEventArgs e)
         {
-            bool result = await this.groupBoxControl.window.RunAsyncOperation(async () =>
-            {
-                return await ChannelSession.Services.InitializeSpotify();
-            });
+            //bool result = await this.groupBoxControl.window.RunAsyncOperation(async () =>
+            //{
+            //    return await ChannelSession.Services.InitializeSpotify();
+            //});
 
-            if (!result)
-            {
-                await DialogHelper.ShowMessage("Unable to authenticate with Spotify. Please ensure you approved access for the application in a timely manner.");
-            }
-            else
-            {
-                await this.groupBoxControl.window.RunAsyncOperation(async () =>
-                {
-                    if (ChannelSession.Services.Spotify.Profile == null)
-                    {
-                        await DialogHelper.ShowMessage("We were unable to get your user data, please try to authenticate again with Spotify.");
-                        await ChannelSession.Services.DisconnectSpotify();
-                    }
-                    else if (!ChannelSession.Services.Spotify.Profile.IsPremium)
-                    {
-                        await DialogHelper.ShowMessage("You do not have Spotify Premium, which is required for this feature.");
-                        await ChannelSession.Services.DisconnectSpotify();
-                    }
-                    else
-                    {
-                        this.NewLoginGrid.Visibility = Visibility.Collapsed;
-                        this.ExistingAccountGrid.Visibility = Visibility.Visible;
+            //if (!result)
+            //{
+            //    await DialogHelper.ShowMessage("Unable to authenticate with Spotify. Please ensure you approved access for the application in a timely manner.");
+            //}
+            //else
+            //{
+            //    await this.groupBoxControl.window.RunAsyncOperation(async () =>
+            //    {
+            //        if (ChannelSession.Services.Spotify.Profile == null)
+            //        {
+            //            await DialogHelper.ShowMessage("We were unable to get your user data, please try to authenticate again with Spotify.");
+            //            await ChannelSession.Services.DisconnectSpotify();
+            //        }
+            //        else if (!ChannelSession.Services.Spotify.Profile.IsPremium)
+            //        {
+            //            await DialogHelper.ShowMessage("You do not have Spotify Premium, which is required for this feature.");
+            //            await ChannelSession.Services.DisconnectSpotify();
+            //        }
+            //        else
+            //        {
+            //            this.NewLoginGrid.Visibility = Visibility.Collapsed;
+            //            this.ExistingAccountGrid.Visibility = Visibility.Visible;
 
-                        this.SetCompletedIcon(visible: true);
-                    }
-                });
-            }
+            //            this.SetCompletedIcon(visible: true);
+            //        }
+            //    });
+            //}
         }
 
         private async void LogOutButton_Click(object sender, RoutedEventArgs e)
         {
-            await this.groupBoxControl.window.RunAsyncOperation(async () =>
-            {
-                await ChannelSession.Services.DisconnectSpotify();
-            });
-            ChannelSession.Settings.SpotifyOAuthToken = null;
+            //await this.groupBoxControl.window.RunAsyncOperation(async () =>
+            //{
+            //    await ChannelSession.Services.DisconnectSpotify();
+            //});
+            //ChannelSession.Settings.SpotifyOAuthToken = null;
 
-            this.ExistingAccountGrid.Visibility = Visibility.Collapsed;
-            this.NewLoginGrid.Visibility = Visibility.Visible;
+            //this.ExistingAccountGrid.Visibility = Visibility.Collapsed;
+            //this.NewLoginGrid.Visibility = Visibility.Visible;
 
-            this.SetCompletedIcon(visible: false);
+            //this.SetCompletedIcon(visible: false);
         }
     }
 }
